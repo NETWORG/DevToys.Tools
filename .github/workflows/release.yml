@@ -17,10 +17,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: NuGet login (OIDC → temp API key)
-        uses: NuGet/login@v1
-        id: login
-        with:
-          user: ${{ secrets.NUGET_USER }}
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: ${{ secrets.NUGET_USER }}
     - name: Extract version from tag
       id: get_version
       run: |
