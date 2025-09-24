@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+
+    <!-- NuGet package -->
+    <Version>0.0.0-preview.0</Version>
+    <Authors>NETWORG,hajekj</Authors>
+    <Title>NETWORG.DevToys.Tools</Title>
+    <Description>A collection of tools for DevToys.</Description>
+    <PackageProjectUrl>https://github.com/NETWORG/DevToys.Tools</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/NETWORG/DevToys.Tools</RepositoryUrl>
+    <PackageTags>devtoys-app</PackageTags>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DevToys.Api" Version="2.0.8-preview" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\**" />
+    <None Include="$(RepoRoot)..\LICENSE.md" Link="LICENSE.md" Pack="true" PackagePath="\" />
+		<None Include="$(RepoRoot)..\README.md" Link="README.md" Pack="true" PackagePath="\" />
+
+    <!-- This makes sure to include platform-specific binaries into the NuGet package, if any-->
+    <None Include="runtimes\**" Pack="true" PackagePath="\lib\net8.0\runtimes\">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- This makes sure to include dependencies of the project into the NuGet package, if any -->
+  <Target Name="IncludeAllFilesInTargetDir" BeforeTargets="_GetPackageFiles">
+    <ItemGroup>
+      <None Include="$(OutputPath)\**">
+        <Pack>true</Pack>
+        <PackagePath>lib\net8.0</PackagePath>
+      </None>
+    </ItemGroup>
+  </Target>
+
+  <ItemGroup>
+    <Compile Update="JsonValueEncoderDecoderTranslations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>JsonValueEncoderDecoderTranslations.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Translations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Translations.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="JsonValueEncoderDecoderTranslations.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>JsonValueEncoderDecoderTranslations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Translations.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Translations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

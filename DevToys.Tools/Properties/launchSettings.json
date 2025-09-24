@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "DevToys GUI": {
+      "commandName": "Executable",
+      "executablePath": "..\\..\\..\\..\\temp\\gui\\DevToys.exe",
+      "environmentVariables": {
+        "EXTRAPLUGIN": "$(TargetDir)"
+      }
+    },
+    "DevToys CLI": {
+      "commandName": "Executable",
+      "executablePath": "..\\..\\..\\..\\temp\\cli\\DevToys.CLI.exe",
+      "commandLineArgs": "jsonvalue -i \"{\\\"hello world\"",
+      "environmentVariables": {
+        "EXTRAPLUGIN": "$(TargetDir)"
+      }
+    }
+  }
+}
